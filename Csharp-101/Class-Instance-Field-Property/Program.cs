@@ -1,4 +1,8 @@
-﻿
+﻿namespace ClassInstanceFieldProperty;
+class Program
+{
+    static void Main(string[] args)
+    {
         // Syntax
         // Class ClassName
         //{
@@ -29,20 +33,22 @@
         employee2.Department = "Purchasing Department";
 
         employee2.GetEmployeeInfo();
-       
-    class Employee
-    {
-        public string Name;
-        public string LastName;
-        public int No;
-        public string Department;
-
-        public void GetEmployeeInfo()
-        {
-            Console.WriteLine("Name of the employee: {0}",Name);
-            Console.WriteLine("Last Name of the employee: {0}",LastName);
-            Console.WriteLine("Id of the employee: {0}",No);
-            Console.WriteLine("Department of the employee: {0}",Department);
-        }
     }
+}
+
+class Employee
+{
+    public string Name;
+    public string LastName;
+    public int No;
+    public string Department;
+
+    public void GetEmployeeInfo()
+    {
+        Console.WriteLine("Name of the employee: {0}", Name);
+        Console.WriteLine("Last Name of the employee: {0}", LastName);
+        Console.WriteLine("Id of the employee: {0}", No);
+        Console.WriteLine("Department of the employee: {0}", Department);
+    }
+}
 
