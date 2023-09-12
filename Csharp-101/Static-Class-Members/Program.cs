@@ -19,7 +19,6 @@ class Program
 class Employee
 {
     private static int employeeNumber;
-
     public static int EmployeeNumber { get => employeeNumber; set => employeeNumber = value; }
 
     private string Name;
