@@ -33,71 +33,51 @@ namespace WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            try
-            {
-                GetGenreDetailQuery query = new GetGenreDetailQuery(_mapper, _context);
-                query.GenreId = id;
-                GetGenreQueryDetailValidator validator = new GetGenreQueryDetailValidator();
-                validator.ValidateAndThrow(query);
-                var genre = query.Handle();
-                return Ok(genre);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            GetGenreDetailQuery query = new GetGenreDetailQuery(_mapper, _context);
+            query.GenreId = id;
+            GetGenreQueryDetailValidator validator = new GetGenreQueryDetailValidator();
+            validator.ValidateAndThrow(query);
+            var genre = query.Handle();
+            return Ok(genre);
+
         }
         [HttpPut]
         public IActionResult AddGenre([FromBody] CreateGenreModel newGenre)
         {
-            try
-            {
-                CreateGenreCommand command = new CreateGenreCommand(_context);
-                command.Model = newGenre;
-                CreateGenreCommandValidator validatior = new CreateGenreCommandValidator();
-                validatior.ValidateAndThrow(command);
-                command.Handle();
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            CreateGenreCommand command = new CreateGenreCommand(_context);
+            command.Model = newGenre;
+            CreateGenreCommandValidator validatior = new CreateGenreCommandValidator();
+            validatior.ValidateAndThrow(command);
+            command.Handle();
+            return Ok();
+
         }
         [HttpPut("{id}")]
         public IActionResult UpdateGenre(int id , [FromBody] UpdateGenreModel updateGenre){
-            try
-            {
-                UpdateGenreCommand command = new UpdateGenreCommand(_context);
-                command.GenreId = id;
-                command.Model = updateGenre;
-                UpdateGenreCommandValidator validator = new UpdateGenreCommandValidator();
-                validator.ValidateAndThrow(command);
-                command.Handle();
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            UpdateGenreCommand command = new UpdateGenreCommand(_context);
+            command.GenreId = id;
+            command.Model = updateGenre;
+            UpdateGenreCommandValidator validator = new UpdateGenreCommandValidator();
+            validator.ValidateAndThrow(command);
+            command.Handle();
+            return Ok();
+    
 
         }
         [HttpDelete("{id}")]
         public IActionResult DeleteGenre(int id)
         {
-            try
-            {
-                DeleteGenreCommand command = new DeleteGenreCommand(_context);
-                command.GenreId = id;
-                DeleteGenreCommandValidator validator = new DeleteGenreCommandValidator();
-                validator.ValidateAndThrow(command);
-                command.Handle();
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            DeleteGenreCommand command = new DeleteGenreCommand(_context);
+            command.GenreId = id;
+            DeleteGenreCommandValidator validator = new DeleteGenreCommandValidator();
+            validator.ValidateAndThrow(command);
+            command.Handle();
+            return Ok();
+
         }
     }
 }
