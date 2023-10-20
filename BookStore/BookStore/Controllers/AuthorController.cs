@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
@@ -23,47 +23,77 @@ namespace WebApi.AddControllers
         }
         [HttpGet]
         public IActionResult GetAuthors(){
-            GetAuthorsQuery query = new GetAuthorsQuery(_mapper,_context);
-            var obj = query.Handle();
-            return Ok(obj); 
+
+                GetAuthorsQuery query = new GetAuthorsQuery(_mapper, _context);
+                var obj = query.Handle();
+                return Ok(obj);
         }
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            GetAuthorQuery query = new GetAuthorQuery(_context,_mapper);
-            query.AuthorId=id;
-            var obj = query.Handle();
-            return Ok(obj);
+            try
+            {
+                GetAuthorQuery query = new GetAuthorQuery(_context, _mapper);
+                query.AuthorId = id;
+                var obj = query.Handle();
+                return Ok(obj);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+
         }
         [HttpPost]
         public IActionResult CreateAuthor([FromBody] CreateAuthorModel model)
         {
-            CreateAuthorCommand command = new CreateAuthorCommand(_context,_mapper);
-            command.Model=model;
-            CreateAuthorCommandValidator validator = new CreateAuthorCommandValidator();
-            validator.ValidateAndThrow(command);
-            command.Handle();
-            return Ok();
+            try
+            {
+                CreateAuthorCommand command = new CreateAuthorCommand(_context, _mapper);
+                command.Model = model;
+                CreateAuthorCommandValidator validator = new CreateAuthorCommandValidator();
+                validator.ValidateAndThrow(command);
+                command.Handle();
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         [HttpPut("{id}")]
         public IActionResult UpdateAuthor(int id , [FromBody] UpdateAuthorModel model){
-            UpdateAuthorCommand command = new UpdateAuthorCommand(_context);
-            command.Model=model;
-            command.AuthorId=id;
-            UpdateAuthorCommandValidator validator = new UpdateAuthorCommandValidator();
-            validator.ValidateAndThrow(command);
-            command.Handle();
-            return Ok();
+            try
+            {
+                UpdateAuthorCommand command = new UpdateAuthorCommand(_context);
+                command.Model = model;
+                command.AuthorId = id;
+                UpdateAuthorCommandValidator validator = new UpdateAuthorCommandValidator();
+                validator.ValidateAndThrow(command);
+                command.Handle();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         [HttpDelete("{id}")]
         public IActionResult DeleteBook(int id)
         {
-            DeleteAuthorCommand command = new DeleteAuthorCommand(_context);
-            command.AuthorId=id;
-            DeleteAuthorCommandValidator validator = new DeleteAuthorCommandValidator();
-            validator.ValidateAndThrow(command);
-            command.Handle();
-            return Ok();
+            try
+            {
+                DeleteAuthorCommand command = new DeleteAuthorCommand(_context);
+                command.AuthorId = id;
+                DeleteAuthorCommandValidator validator = new DeleteAuthorCommandValidator();
+                validator.ValidateAndThrow(command);
+                command.Handle();
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
