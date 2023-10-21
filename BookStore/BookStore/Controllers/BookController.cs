@@ -16,11 +16,13 @@ namespace WebApi.Controllers{
     public class BookController : ControllerBase{
         private readonly IBookStoreDbContext _context;
         private readonly IMapper  _mapper;
+        // Constructor for BookController
         public BookController(IBookStoreDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
+        // Get a list of books
         [HttpGet]
         public IActionResult GetBooks()
         {
@@ -29,6 +31,7 @@ namespace WebApi.Controllers{
             return Ok(result);
 
         }
+        // Get book by ID
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -42,6 +45,7 @@ namespace WebApi.Controllers{
             return Ok(result);
 
         }
+        // Add a new book
         [HttpPost]
         public IActionResult AddBook([FromBody] CreateBookModel newBook)
         {
@@ -55,10 +59,11 @@ namespace WebApi.Controllers{
             return Ok();
 
         }
+        // Update a book by ID
         [HttpPut("{id}")]
         public IActionResult UpdateBook(int id ,[FromBody] UpdateBookModel updatedBook )
         {
-
+            // Create a command to update a book
             UpdateBookCommand updateBookCommand = new UpdateBookCommand(_context);
             updateBookCommand.Model = updatedBook;
             updateBookCommand.BookId = id;
@@ -68,6 +73,7 @@ namespace WebApi.Controllers{
             return Ok();
 
         }
+        // Delete a book by ID
         [HttpDelete("{id}")]
         public IActionResult DeleteBook(int id)
         {

@@ -1,31 +1,49 @@
-
 using System;
 using System.Linq;
 using WebApi.DbOperations;
 
 namespace WebApi.Application.AuthorOperation.Commands.DeleteAuthor
 {
-    public class DeleteAuthorCommand {
+    /// <summary>
+    /// DeleteAuthorCommand is the command used to delete an author by their ID.
+    /// </summary>
+    public class DeleteAuthorCommand
+    {
         private readonly IBookStoreDbContext _context;
+
+        /// <summary>
+        /// The ID of the author to be deleted.
+        /// </summary>
         public int AuthorId { get; set; }
+
         public DeleteAuthorCommand(IBookStoreDbContext context)
         {
             _context = context;
         }
+
+        /// <summary>
+        /// Handles the author deletion process.
+        /// </summary>
         public void Handle()
         {
-            var author = _context.Authors.SingleOrDefault(x=>x.AuthorId==AuthorId);
-            if(AuthorId<=0)
+            var author = _context.Authors.SingleOrDefault(x => x.AuthorId == AuthorId);
+
+            if (AuthorId <= 0)
             {
-                throw new InvalidOperationException("Geçersiz id girişi yapıldı");
+                throw new InvalidOperationException("Invalid ID input.");
             }
-            if(author is null)
+
+            if (author is null)
             {
-                throw new InvalidOperationException("Yazar bulunamadı");
+                throw new InvalidOperationException("Author not found.");
             }
-            var authorsBook = _context.Books.Where(x => x.AuthorId == AuthorId).Any();
-            if (authorsBook)
-                throw new InvalidProgramException("Yazarın hali hazırda kitabı vardır");
+
+            var authorHasBooks = _context.Books.Any(x => x.AuthorId == AuthorId);
+
+            if (authorHasBooks)
+            {
+                throw new InvalidProgramException("The author has books in the database.");
+            }
 
             _context.Authors.Remove(author);
             _context.SaveChanges();

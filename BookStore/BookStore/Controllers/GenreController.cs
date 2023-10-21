@@ -12,17 +12,21 @@ using System;
 
 namespace WebApi.Controllers
 {
+    /// <summary>Controller for managing genre operations.</summary>
     [ApiController]
     [Route("[controller]s")]
     public class GenreController : ControllerBase {
         private readonly IBookStoreDbContext _context;
         private readonly IMapper _mapper;
+        /// <summary>Constructor for GenreController.</summary>
+        /// <param name="mapper">AutoMapper instance.</param>
+        /// <param name="context">Database context.</param>
         public GenreController(IMapper mapper, IBookStoreDbContext context)
         {
             _mapper = mapper;
             _context = context;
         }
-
+        /// <summary>Get a list of genres.</summary>
         [HttpGet]
         public IActionResult GetGenres()
         {
@@ -30,6 +34,8 @@ namespace WebApi.Controllers
             var obj = query.Handle();
             return Ok(obj);
         }
+        /// <summary>Get a genre by its ID.</summary>
+        /// <param name="id">The ID of the genre to retrieve.</param>
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -42,6 +48,8 @@ namespace WebApi.Controllers
             return Ok(genre);
 
         }
+        /// <summary>Add a new genre.</summary>
+        /// <param name="newGenre">The model for creating a new genre.</param>
         [HttpPut]
         public IActionResult AddGenre([FromBody] CreateGenreModel newGenre)
         {
@@ -54,6 +62,9 @@ namespace WebApi.Controllers
             return Ok();
 
         }
+        /// <summary>Update a genre by its ID.</summary>
+        /// <param name="id">The ID of the genre to update.</param>
+        /// <param name="updateGenre">The model for updating the genre.</param>
         [HttpPut("{id}")]
         public IActionResult UpdateGenre(int id , [FromBody] UpdateGenreModel updateGenre){
 
@@ -67,6 +78,8 @@ namespace WebApi.Controllers
     
 
         }
+        /// <summary>Delete a genre by its ID.</summary>
+        /// <param name="id">The ID of the genre to delete.</param>
         [HttpDelete("{id}")]
         public IActionResult DeleteGenre(int id)
         {

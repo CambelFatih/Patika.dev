@@ -5,6 +5,4 @@ namespace WebApi.Common{
         ScienceFiction = 2,
         Noval = 3,
     }
-
-
 }
