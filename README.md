@@ -1,6 +1,6 @@
 # Patika.dev
 ## BookStore App
-BookStore Application Book, Author ve Genre  CRUD operations
+BookStore Application Book, Author and Genre  CRUD operations
 
 ## Patika.dev Csharp 101 projeleri  
 * Sınıf Nedir ? Instance, Field, Property  
