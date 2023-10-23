@@ -30,19 +30,19 @@ namespace WebApi.Application.AuthorOperation.Commands.DeleteAuthor
 
             if (AuthorId <= 0)
             {
-                throw new InvalidOperationException("Invalid ID input.");
+                throw new InvalidOperationException("Invalid ID input provided");
             }
 
             if (author is null)
             {
-                throw new InvalidOperationException("Author not found.");
+                throw new InvalidOperationException("Invalid ID input provided");
             }
 
             var authorHasBooks = _context.Books.Any(x => x.AuthorId == AuthorId);
 
             if (authorHasBooks)
             {
-                throw new InvalidProgramException("The author has books in the database.");
+                throw new InvalidProgramException("Invalid ID input provided");//The author has books in the database.
             }
 
             _context.Authors.Remove(author);

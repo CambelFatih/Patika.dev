@@ -21,7 +21,7 @@ namespace WebApi.Application.GenreOperation.Queries.GetGenreDetail
             var genres = _context.Genres.SingleOrDefault(x => x.IsActive&&x.Id==GenreId);
             if(genres is null )
             {
-                throw new InvalidOperationException("Kitap türü bulunamadı");
+                throw new InvalidOperationException("Genre not found.");// Book type not found
             }
             GetGenreDetailModel returnObj = _mapper.Map<GetGenreDetailModel>(genres);
             return returnObj;
