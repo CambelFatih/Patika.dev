@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.API", "BookStore\BookStore.API.csproj", "{DDCE952C-6192-439E-A303-825E9D617092}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.API", "BookStore.API\BookStore.API.csproj", "{DDCE952C-6192-439E-A303-825E9D617092}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F0E65FB9-8EC4-4EF9-8287-9E48C742168E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.UnitTest", "Tests\WebApi.UnitTest\BookStore.UnitTest.csproj", "{4249CD9D-E866-486E-8E13-1C9FC6B67839}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.UnitTest", "Tests\BookStore.UnitTest\BookStore.UnitTest.csproj", "{4249CD9D-E866-486E-8E13-1C9FC6B67839}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
